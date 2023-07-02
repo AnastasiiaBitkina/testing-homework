@@ -1,28 +1,29 @@
-const { assert } = require('chai');
+const assert = require('assert');
 
-describe('Адаптивность вёрстки', function() {
-    it('должна соответствовать требованиям при ширине экрана 500px', function() {
-        return this.browser.url('http://localhost:3000/hw/store')
-            .setWindowSize(500, 800)
-            .waitForVisible('.navbar-toggler')
-            .isVisible('.navbar-toggler')
-            .then((isBurgerVisible) => {
-                assert.isTrue(isBurgerVisible, 'Гамбургер должен быть видим при ширине 500px');
-            });
-    });
-});
+describe('Меню', function () {
+    it('должно закрываться', async function () {
+        // перейти на страницу
+        await this.browser.url('http://localhost:3000/hw/store');
+        // установить размер окна
+        await this.browser.setWindowSize(500, 3000);
 
-describe('Меню "гамбургера"', function() {
-    it('должно закрываться при выборе элемента', function() {
-        return this.browser.url('http://localhost:3000/hw/store')
-            .setWindowSize(500, 800)
-            .click('.navbar-toggler')
-            .waitForVisible('.nav-link')
-            .click('.nav-link')
-            .waitForVisible('.navbar-collapse.collapse')
-            .isVisible('.navbar-collapse.collapse')
-            .then((isBurgerMenuCollapsed) => {
-                assert.isTrue(isBurgerMenuCollapsed, 'Меню "гамбургера" должно быть скрыто после выбора элемента');
-            });
+        // кликаем на бургер
+        const navigationToggle = await this.browser.$('[aria-label="Toggle navigation"]');
+        await navigationToggle.click();
+
+        // даем анимации меню время на то, чтобы полностью отобразиться
+        await this.browser.pause(1000);
+
+        // ждем, пока меню не станет видимым
+        const navbar = await this.browser.$('.navbar-collapse');
+        await navbar.waitForDisplayed({ timeout: 5000 });
+
+        // кликаем на ссылку каталога для открытия
+        const catalogLink = await this.browser.$(`[data-testid="nav-link-catalog"]`);
+        await catalogLink.click();
+
+        // проверяем, что элемент больше не видим
+        const catalogLinkNotVisible = await catalogLink.isDisplayed();
+        assert.ok(!catalogLinkNotVisible, 'Элемент все еще видим');
     });
 });

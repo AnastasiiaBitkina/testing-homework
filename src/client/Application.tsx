@@ -36,13 +36,13 @@ export const Application: FC = () => {
         <Helmet titleTemplate="%s — Example store" />
         <nav className="navbar navbar-expand-sm navbar-light bg-light">
             <div className="container">
-                <Link className={bem('Brand', ['navbar-brand'])} to="/">Example store</Link>
+                <Link className={bem('Brand', ['navbar-brand'])} data-testid="BrandLink" to="/">Example store</Link>
                 <button className={bem('Toggler', ['navbar-toggler'])} aria-label="Toggle navigation" onClick={toggle}>
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className={bem('Menu', [navbarClass])}>
                     <div className="navbar-nav">
-                        <NavLink className="nav-link" activeClassName="active" to="/catalog" onClick={hide}>Catalog</NavLink>
+                        <NavLink className="nav-link" activeClassName="active" to="/catalog" data-testid="nav-link-catalog" onClick={hide}>Catalog</NavLink>
                         <NavLink className="nav-link" activeClassName="active" to="/delivery" onClick={hide}>Delivery</NavLink>
                         <NavLink className="nav-link" activeClassName="active" to="/contacts" onClick={hide}>Contacts</NavLink>
                         <NavLink className="nav-link" activeClassName="active" to="/cart" onClick={hide}>{cartLabel}</NavLink>

@@ -10,7 +10,11 @@ module.exports = {
       automationProtocol: "webdriver",
       desiredCapabilities: {
         browserName: "chrome",
+        'goog:chromeOptions': {
+          args: ['--window-size=500,3000']
+      }
       },
+      
       windowSize: {
         width: 1920,
         height: 1080

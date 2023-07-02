@@ -45,7 +45,7 @@ export const Application: FC = () => {
                         <NavLink className="nav-link" activeClassName="active" to="/catalog" data-testid="nav-link-catalog" onClick={hide}>Catalog</NavLink>
                         <NavLink className="nav-link" activeClassName="active" to="/delivery" onClick={hide}>Delivery</NavLink>
                         <NavLink className="nav-link" activeClassName="active" to="/contacts" onClick={hide}>Contacts</NavLink>
-                        <NavLink className="nav-link" activeClassName="active" to="/cart" onClick={hide}>{cartLabel}</NavLink>
+                        <NavLink className="nav-link" activeClassName="active" to="/cart" data-testid="nav-link-cart" onClick={hide}>{cartLabel}</NavLink>
                     </div>
                 </div>
             </div>
